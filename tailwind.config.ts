@@ -7,7 +7,13 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        shizuru: ['Shizuru'],
+        maven: ['Maven_Pro'],
+        whisper: ['whisper'],
+      },
+    },
   },
   plugins: [],
 }
