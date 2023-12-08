@@ -16,7 +16,7 @@ const MotivationalQuotes = [
 ]
 
 const DemotivationalQuotes = [
-  'A vida é um pêndulo entre o "me deu mal" e o "me ferrei".',
+  'A sua vida é um pêndulo entre o "me dei mal" e o "me ferrei".',
   'Na hora certa, tudo vai dar errado.',
   'É por isso que, na hora de apresentar o trabalho, você só segurava a cartolina.',
   'O mérito da derrota é todo seu, orgulhe-se.',
@@ -29,26 +29,35 @@ const DemotivationalQuotes = [
 ]
 
 export function Main() {
-  const getRandomNumber = (max: number) => {
-    const randomNumber = Math.floor(Math.random() * max)
-    return console.log(randomNumber)
-  }
-
   const [isMotivational, setIsMotivational] = useState(true)
   const [isActive, setIsActive] = useState(false)
+  const [quote, setQuote] = useState('')
+
+  const getQuote = () => {
+    const getRandomNumber = () => {
+      const randomNumber = Math.floor(Math.random() * 10)
+      return randomNumber
+    }
+    setIsActive(true)
+
+    if (!isMotivational) {
+      setQuote(MotivationalQuotes[getRandomNumber()])
+    } else {
+      setQuote(DemotivationalQuotes[getRandomNumber()])
+    }
+  }
 
   return (
     <>
-      <section className="w-full max-w-[1024px] mx-auto bg-neutral-50 rounded-lg mt-14 p-10">
+      <section className="w-full max-w-[1024px] mx-auto rounded-lg mt-14 p-10">
         <h2 className="text-center font-maven text-red-600 font-bold text-xl">
-          ESCOLHA UMA DAS OPÇÕES ABAIXO E ALEGRE O SEU DIA:
+          ESCOLHA UMA DAS OPÇÕES ABAIXO E SINTA-SE MELHOR:
         </h2>
         <div className="mx-auto w-full flex items-center justify-around mt-10">
           <button
             onClick={() => {
-              getRandomNumber(10)
+              getQuote()
               setIsMotivational(true)
-              setIsActive(true)
             }}
             className="bg-red-500 text-neutral-50 text-center font-bold px-6 py-4 rounded-lg"
           >
@@ -56,9 +65,8 @@ export function Main() {
           </button>
           <button
             onClick={() => {
-              getRandomNumber(10)
+              getQuote()
               setIsMotivational(false)
-              setIsActive(true)
             }}
             className="bg-red-500 text-neutral-50 text-center font-bold px-6 py-4 rounded-lg"
           >
@@ -67,15 +75,15 @@ export function Main() {
         </div>
       </section>
       {isActive && (
-        <section className="w-full max-w-[1024px] mx-auto bg-neutral-50 rounded-lg mt-3 p-5">
+        <section className="w-full max-w-[1024px] mx-auto rounded-lg mt-3 p-5">
           <div className="bg-[url('/notebook.svg')] bg-no-repeat mx-auto max-w-[588px] max-h-[260px] p-10">
             {isMotivational ? (
               <p className="text-center font-whisper text-3xl">
-                &quot; {MotivationalQuotes[9]} &quot;
+                &quot; {quote} &quot;
               </p>
             ) : (
               <p className="text-center font-whisper text-3xl">
-                &quot; {DemotivationalQuotes[9]} &quot;
+                &quot; {quote} &quot;
               </p>
             )}
           </div>
